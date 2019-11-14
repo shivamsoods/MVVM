@@ -1,12 +1,33 @@
 package com.example.shivam_aculix.models;
 
 public class MainImageModel {
+    private String id;
     private String author;
-    private String imageUrl;
+    private String width;
+    private String height;
+    private String url;
+    private String download_url;
 
-    public MainImageModel(String author, String imageUrl) {
+    public MainImageModel(String author, String download_url) {
         this.author = author;
-        this.imageUrl = imageUrl;
+        this.download_url = download_url;
+    }
+
+    public MainImageModel(String id, String author, String width, String height, String url, String download_url) {
+        this.id = id;
+        this.author = author;
+        this.width = width;
+        this.height = height;
+        this.url = url;
+        this.download_url = download_url;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getAuthor() {
@@ -17,11 +38,35 @@ public class MainImageModel {
         this.author = author;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public String getWidth() {
+        return width;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setWidth(String width) {
+        this.width = width;
+    }
+
+    public String getHeight() {
+        return height;
+    }
+
+    public void setHeight(String height) {
+        this.height = height;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public String getDownload_url() {
+        return download_url;
+    }
+
+    public void setDownload_url(String download_url) {
+        this.download_url = download_url;
     }
 }

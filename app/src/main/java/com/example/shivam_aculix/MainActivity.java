@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         mMainViewModel.getMainImages().observe(this, new Observer<List<MainImageModel>>() {
 
             @Override
-            public void onChanged(@Nullable List<MainImageModel> nicePlaces) {
+            public void onChanged(@Nullable List<MainImageModel> MainImage) {
                 mAdapter.notifyDataSetChanged();
             }
         });

@@ -40,15 +40,14 @@ public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, 
 @Override
 public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
 
-        // Set the name of the 'MainImage'
         ((ViewHolder)viewHolder).mName.setText(mMainImages.get(i).getAuthor());
 
-        // Set the image
         RequestOptions defaultOptions = new RequestOptions()
         .error(R.drawable.ic_launcher_background);
+
         Glide.with(mContext)
         .setDefaultRequestOptions(defaultOptions)
-        .load(mMainImages.get(i).getImageUrl())
+        .load(mMainImages.get(i).getDownload_url())
         .into(((ViewHolder)viewHolder).mImage);
         }
 
