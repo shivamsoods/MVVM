@@ -14,18 +14,17 @@ import com.bumptech.glide.request.RequestOptions;
 import com.example.shivam_aculix.R;
 import com.example.shivam_aculix.models.MainImageModel;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-private List<MainImageModel> mMainImages = new ArrayList<>();
+private List<MainImageModel> mImageList;
 private Context mContext;
 
 public MainRecyclerAdapter(Context context, List<MainImageModel> MainImages) {
-        mMainImages = MainImages;
+        mImageList = MainImages;
         mContext = context;
         }
 
@@ -40,20 +39,20 @@ public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, 
 @Override
 public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
 
-        ((ViewHolder)viewHolder).mName.setText(mMainImages.get(i).getAuthor());
+        ((ViewHolder)viewHolder).mName.setText(mImageList.get(i).getAuthor());
 
         RequestOptions defaultOptions = new RequestOptions()
         .error(R.drawable.ic_launcher_background);
 
         Glide.with(mContext)
         .setDefaultRequestOptions(defaultOptions)
-        .load(mMainImages.get(i).getDownload_url())
+        .load(mImageList.get(i).getDownload_url())
         .into(((ViewHolder)viewHolder).mImage);
         }
 
 @Override
 public int getItemCount() {
-        return mMainImages.size();
+        return mImageList.size();
         }
 
 private class ViewHolder extends RecyclerView.ViewHolder{

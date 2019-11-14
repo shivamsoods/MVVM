@@ -15,13 +15,12 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-import static androidx.constraintlayout.widget.Constraints.TAG;
 
 public class MainImageRepository {
 
     private static MainImageRepository instance;
     private ArrayList<MainImageModel> dataSet = new ArrayList<>();
-    private Call<List<MainImageModel>> call;
+    private MutableLiveData<List<MainImageModel>> LiveData = new MutableLiveData<>();
 
     public static MainImageRepository getInstance() {
         if (instance == null) {
@@ -31,12 +30,30 @@ public class MainImageRepository {
     }
 
     public MutableLiveData<List<MainImageModel>> getMainImages() {
-        makeAPICall();
 
-        MutableLiveData<List<MainImageModel>> data = new MutableLiveData<>();
-        data.setValue(dataSet);
-        Log.d(TAG, "getMainImages: "+dataSet);
-        return data;
+        APIService apiCall = retrofit.create(APIService.class);
+        Call<List<MainImageModel>> call = apiCall.getImageList();
+
+        call.enqueue(new Callback<List<MainImageModel>>() {
+            @Override
+            public void onResponse(Call<List<MainImageModel>> call, Response<List<MainImageModel>> response) {
+                List<MainImageModel> list = response.body();
+
+                assert list != null;
+                for (MainImageModel imageModel : list) {
+                    dataSet.add(new MainImageModel(imageModel.getAuthor(),imageModel.getDownload_url())
+                    );
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<List<MainImageModel>> call, Throwable t) {
+
+            }
+        });
+        LiveData.setValue(dataSet);
+        return LiveData ;
     }
 
 
@@ -47,37 +64,8 @@ public class MainImageRepository {
 
     private static Retrofit retrofit = retrofitBuilder.build();
 
-    private APIService apiCall = retrofit.create(APIService.class);
 
 
-    private void makeAPICall() {
-
-        call = apiCall.getImageList();
-        call.enqueue(new Callback<List<MainImageModel>>() {
-            @Override
-            public void onResponse(Call<List<MainImageModel>> call, Response<List<MainImageModel>> response) {
-                List<MainImageModel> list = response.body();
-
-                assert list != null;
-                setDataSet(list);
-            }
-
-            @Override
-            public void onFailure(Call<List<MainImageModel>> call, Throwable t) {
-
-            }
-        });
-    }
-
-    private void setDataSet(List<MainImageModel> list) {
-        for (MainImageModel imageModel : list) {
-            Log.d(TAG, "setDataSet: "+imageModel.getAuthor());
-            dataSet.add(new MainImageModel(imageModel.getAuthor(),
-                    imageModel.getDownload_url())
-            );
-        }
-
-    }
 }
 
 
