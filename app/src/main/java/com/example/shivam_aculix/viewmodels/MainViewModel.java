@@ -20,6 +20,7 @@ public class MainViewModel  extends ViewModel {
         }
         mRepo = MainImageRepository.getInstance();
         mMainImages = mRepo.getMainImages();
+
     }
 
 
