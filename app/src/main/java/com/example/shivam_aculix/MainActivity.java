@@ -37,18 +37,31 @@ public class MainActivity extends AppCompatActivity {
             public void onChanged(@Nullable List<MainImageModel> mainImageModels) {
                 initRecyclerView(mainImageModels);
                 mAdapter.notifyDataSetChanged();
+
             }
         });
+        //initRecyclerView();
 
 
 
 
     }
-
     private void initRecyclerView(List<MainImageModel> mainImageModels){
         Log.d("TAG", "initRecyclerViewMAIN: "+ mMainViewModel.getMainImages().getValue());
-            //mAdapter = new MainRecyclerAdapter(mMainViewModel.getMainImages().getValue());
-            mAdapter=new MainRecyclerAdapter(mainImageModels);
+       // mAdapter = new MainRecyclerAdapter(mMainViewModel.getMainImages().getValue());
+        mAdapter=new MainRecyclerAdapter(mainImageModels);
+        RecyclerView.LayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(linearLayoutManager);
+        mRecyclerView.setAdapter(mAdapter);
+        mAdapter.notifyDataSetChanged();
+
+
+    }
+
+    private void initRecyclerView(){
+        Log.d("TAG", "initRecyclerViewMAIN: "+ mMainViewModel.getMainImages().getValue());
+            mAdapter = new MainRecyclerAdapter(mMainViewModel.getMainImages().getValue());
+            //mAdapter=new MainRecyclerAdapter(mainImageModels);
             RecyclerView.LayoutManager linearLayoutManager = new LinearLayoutManager(this);
             mRecyclerView.setLayoutManager(linearLayoutManager);
             mRecyclerView.setAdapter(mAdapter);
