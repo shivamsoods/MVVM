@@ -18,7 +18,7 @@ import retrofit2.Response;
 public class ItemDataSource extends PageKeyedDataSource<Integer, PicsumApiResponse> {
 
     public static final String TAG="ITEM DATA SOURCE";
-    public static final int LIST_SIZE = 15;
+    public static final int LIST_SIZE = 3;
     private static final int FIRST_PAGE = 1;
 
     @Override
@@ -73,8 +73,6 @@ public class ItemDataSource extends PageKeyedDataSource<Integer, PicsumApiRespon
             @Override
             public void onResponse(Call<List<PicsumApiResponse>> call, Response<List<PicsumApiResponse>> response) {
                 if (response.body() != null) {
-                    //Integer key = (response.body()) ? params.key + 1 : null;
-                    Log.d(TAG, "onResponse: after load "+ params.key);
                     callback.onResult(response.body(), params.key+1);
                 }
             }
