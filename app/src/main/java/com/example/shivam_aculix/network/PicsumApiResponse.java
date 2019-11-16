@@ -5,19 +5,39 @@ import com.example.shivam_aculix.models.MainImageModel;
 import java.util.List;
 
 public class PicsumApiResponse {
-    private List<MainImageModel> imageList;
+    private List<PicsumApiResponse> imageList;
     private int id;
     private String author;
     private int width;
     private int height;
     private String url;
     private String download_url;
+    private boolean has_more;
 
-    public List<MainImageModel> getImageList() {
+    public PicsumApiResponse(List<PicsumApiResponse> imageList, int id, String author, int width, int height, String url, String download_url, boolean has_more) {
+        this.imageList = imageList;
+        this.id = id;
+        this.author = author;
+        this.width = width;
+        this.height = height;
+        this.url = url;
+        this.download_url = download_url;
+        this.has_more = has_more;
+    }
+
+    public boolean isHas_more() {
+        return has_more;
+    }
+
+    public void setHas_more(boolean has_more) {
+        this.has_more = has_more;
+    }
+
+    public List<PicsumApiResponse> getImageList() {
         return imageList;
     }
 
-    public void setImageList(List<MainImageModel> imageList) {
+    public void setImageList(List<PicsumApiResponse> imageList) {
         this.imageList = imageList;
     }
 
@@ -29,7 +49,7 @@ public class PicsumApiResponse {
         this.id = id;
     }
 
-    public List<PicsumApiResponse> getAuthor() {
+    public String getAuthor() {
         return author;
     }
 

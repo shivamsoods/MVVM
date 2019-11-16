@@ -20,13 +20,12 @@ import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-import static android.content.ContentValues.TAG;
 
 public class MainRecyclerPagedAdapter extends PagedListAdapter<PicsumApiResponse, MainRecyclerPagedAdapter.ItemViewHolder> {
 
     private Context mContext;
 
-    protected MainRecyclerPagedAdapter(@NonNull DiffUtil.ItemCallback<PicsumApiResponse> diffCallback) {
+    public MainRecyclerPagedAdapter(Context mContext) {
         super(DIFF_CALLBACK);
         this.mContext = mContext;
     }
@@ -34,6 +33,7 @@ public class MainRecyclerPagedAdapter extends PagedListAdapter<PicsumApiResponse
     protected MainRecyclerPagedAdapter(@NonNull AsyncDifferConfig<PicsumApiResponse> config) {
         super(config);
     }
+
 
     @NonNull
     @Override
@@ -89,5 +89,7 @@ public class MainRecyclerPagedAdapter extends PagedListAdapter<PicsumApiResponse
             mImage = itemView.findViewById(R.id.image);
             mName = itemView.findViewById(R.id.image_name);
         }
+
     }
+
 }

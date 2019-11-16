@@ -1,79 +1,43 @@
 package com.example.shivam_aculix;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.paging.PagedList;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.util.Log;
 
-import com.example.shivam_aculix.adapters.MainRecyclerAdapter;
-import com.example.shivam_aculix.models.MainImageModel;
-import com.example.shivam_aculix.viewmodels.MainViewModel;
+import com.example.shivam_aculix.adapters.MainRecyclerPagedAdapter;
 
-import java.util.List;
+import com.example.shivam_aculix.network.PicsumApiResponse;
+import com.example.shivam_aculix.viewmodels.MainItemViewModel;
+
 
 public class MainActivity extends AppCompatActivity {
 
-    private RecyclerView mRecyclerView;
-    private MainRecyclerAdapter mAdapter;
-    private MainViewModel mMainViewModel;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mRecyclerView = findViewById(R.id.rv_main);
+        RecyclerView mRecyclerView = findViewById(R.id.rv_main);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mRecyclerView.setHasFixedSize(true);
 
-        mMainViewModel = ViewModelProviders.of(this).get(MainViewModel.class);
-        mMainViewModel.init();
+        MainItemViewModel mMainViewModel = ViewModelProviders.of(this).get(MainItemViewModel.class);
+        final MainRecyclerPagedAdapter mAdapter = new MainRecyclerPagedAdapter(this);
 
-        mMainViewModel.getMainImages().observe(this, new Observer<List<MainImageModel>>() {
+        mMainViewModel.picsumPagedList.observe(this, new Observer<PagedList<PicsumApiResponse>>() {
             @Override
-            public void onChanged(@Nullable List<MainImageModel> mainImageModels) {
-                initRecyclerView(mainImageModels);
-                mAdapter.notifyDataSetChanged();
-
+            public void onChanged(PagedList<PicsumApiResponse> picsumApiResponses) {
+                mAdapter.submitList(picsumApiResponses);
             }
         });
-        //initRecyclerView();
 
-
-
-
-    }
-    private void initRecyclerView(List<MainImageModel> mainImageModels){
-        Log.d("TAG", "initRecyclerViewMAIN: "+ mMainViewModel.getMainImages().getValue());
-       // mAdapter = new MainRecyclerAdapter(mMainViewModel.getMainImages().getValue());
-        mAdapter=new MainRecyclerAdapter(mainImageModels);
-        RecyclerView.LayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        mRecyclerView.setLayoutManager(linearLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
-        mAdapter.notifyDataSetChanged();
-
-
     }
-
-    private void initRecyclerView(){
-        Log.d("TAG", "initRecyclerViewMAIN: "+ mMainViewModel.getMainImages().getValue());
-            mAdapter = new MainRecyclerAdapter(mMainViewModel.getMainImages().getValue());
-            //mAdapter=new MainRecyclerAdapter(mainImageModels);
-            RecyclerView.LayoutManager linearLayoutManager = new LinearLayoutManager(this);
-            mRecyclerView.setLayoutManager(linearLayoutManager);
-            mRecyclerView.setAdapter(mAdapter);
-            mAdapter.notifyDataSetChanged();
-
-
-    }
-
 }
-
-
-
-
-
-
