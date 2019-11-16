@@ -14,11 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.shivam_aculix.R;
 import com.example.shivam_aculix.models.MainImageModel;
 import com.squareup.picasso.Picasso;
-
 import java.util.List;
-
 import de.hdodenhof.circleimageview.CircleImageView;
-
 import static android.content.ContentValues.TAG;
 
 public class MainRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
