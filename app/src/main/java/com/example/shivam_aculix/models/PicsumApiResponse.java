@@ -1,45 +1,17 @@
-package com.example.shivam_aculix.network;
+package com.example.shivam_aculix.models;
 
-import com.example.shivam_aculix.models.MainImageModel;
+
+import org.json.JSONArray;
 
 import java.util.List;
 
 public class PicsumApiResponse {
-    private List<PicsumApiResponse> imageList;
     private int id;
     private String author;
     private int width;
     private int height;
     private String url;
     private String download_url;
-    private boolean has_more;
-
-    public PicsumApiResponse(List<PicsumApiResponse> imageList, int id, String author, int width, int height, String url, String download_url, boolean has_more) {
-        this.imageList = imageList;
-        this.id = id;
-        this.author = author;
-        this.width = width;
-        this.height = height;
-        this.url = url;
-        this.download_url = download_url;
-        this.has_more = has_more;
-    }
-
-    public boolean isHas_more() {
-        return has_more;
-    }
-
-    public void setHas_more(boolean has_more) {
-        this.has_more = has_more;
-    }
-
-    public List<PicsumApiResponse> getImageList() {
-        return imageList;
-    }
-
-    public void setImageList(List<PicsumApiResponse> imageList) {
-        this.imageList = imageList;
-    }
 
     public int getId() {
         return id;

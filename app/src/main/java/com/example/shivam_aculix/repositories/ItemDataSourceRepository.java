@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.paging.DataSource;
 import androidx.paging.PageKeyedDataSource;
 
-import com.example.shivam_aculix.network.PicsumApiResponse;
+import com.example.shivam_aculix.models.PicsumApiResponse;
 
 public class ItemDataSourceRepository extends DataSource.Factory {
 

@@ -11,7 +11,7 @@ import android.os.Bundle;
 
 import com.example.shivam_aculix.adapters.MainRecyclerPagedAdapter;
 
-import com.example.shivam_aculix.network.PicsumApiResponse;
+import com.example.shivam_aculix.models.PicsumApiResponse;
 import com.example.shivam_aculix.viewmodels.MainItemViewModel;
 
 
@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onChanged(PagedList<PicsumApiResponse> picsumApiResponses) {
                 mAdapter.submitList(picsumApiResponses);
+                mAdapter.notifyDataSetChanged();
             }
         });
 

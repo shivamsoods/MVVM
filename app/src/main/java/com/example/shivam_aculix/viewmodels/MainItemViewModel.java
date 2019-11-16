@@ -6,7 +6,7 @@ import androidx.paging.LivePagedListBuilder;
 import androidx.paging.PageKeyedDataSource;
 import androidx.paging.PagedList;
 
-import com.example.shivam_aculix.network.PicsumApiResponse;
+import com.example.shivam_aculix.models.PicsumApiResponse;
 import com.example.shivam_aculix.repositories.ItemDataSource;
 import com.example.shivam_aculix.repositories.ItemDataSourceRepository;
 
@@ -25,6 +25,6 @@ public class MainItemViewModel extends ViewModel {
                                     .setPageSize(ItemDataSource.LIST_SIZE)
                                     .build();
 
-        picsumPagedList = (new LivePagedListBuilder(itemDataSourceRepository, config)).build();
+        picsumPagedList = (new LivePagedListBuilder<Integer,PicsumApiResponse>(itemDataSourceRepository,config)).build();
     }
 }
